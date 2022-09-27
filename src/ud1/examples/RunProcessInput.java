@@ -1,3 +1,5 @@
+package ud1.examples;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Locale;

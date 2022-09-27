@@ -1,3 +1,5 @@
+package ud1.examples;
+
 import java.io.IOException;
 import java.util.Arrays;
 
