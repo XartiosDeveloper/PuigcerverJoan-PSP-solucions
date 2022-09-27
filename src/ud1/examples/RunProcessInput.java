@@ -9,8 +9,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 public class RunProcessInput {
-    public static void main (String[] args) throws IOException {
-        if(args.length <= 0) {
+    public static void main (String[] args) {
+        if(args.length == 0) {
             System.err.println("Cal especificar programa.");
             System.exit(-1);
         }
