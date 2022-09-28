@@ -26,6 +26,7 @@ public class DestroyProcess {
             );
         } catch(IOException ex) {
             System.err.println("Excepció d'E/S");
+            System.err.println(ex.getMessage());
             System.exit(-1);
         } catch(InterruptedException ex) {
             System.err.println("El procés fill ha finalitzat de manera incorrecta.");
