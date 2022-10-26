@@ -1,4 +1,4 @@
-package ud2.examples;
+package ud2.examples.runnable;
 
 public class StartRunnables {
     public static void main(String[] args) {

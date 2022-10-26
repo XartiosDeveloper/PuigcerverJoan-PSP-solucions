@@ -26,7 +26,21 @@ public class SumMatrixThread {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> matrix = readMatrixFromCSV("files/ud2/data_matrix.csv");
-        System.out.println(matrix);
+        String CSVPath = "files/ud2/data_matrix.csv";
+        List<List<Integer>> matrix = readMatrixFromCSV(CSVPath);
+
+        // TODO
+
+        for(List<Integer> row : matrix){
+            // TODO: Create thread
+            // TODO: Start thread
+        }
+
+        // TODO: Wait for the threads to finish
+
+        // TODO: Sum the result of each thread
+
+        System.out.printf("La suma dels valors en \"%s\" és %d\n", CSVPath, result);
+
     }
 }

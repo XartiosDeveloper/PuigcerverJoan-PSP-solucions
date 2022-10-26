@@ -1,4 +1,4 @@
-package ud2.examples;
+package ud2.examples.thread;
 
 public class StartThreads {
     public static void main(String[] args) {
