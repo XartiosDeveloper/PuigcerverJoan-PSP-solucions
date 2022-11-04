@@ -21,12 +21,12 @@ public class ManagerTasks {
         EmployeeThread b1 = new EmployeeThread("Anna");
         b1.addTask("Connect API to database", 3000);
         b1.addTask("Shopping API models", 4200);
-        frontend.addEmployee(b1);
+        backend.addEmployee(b1);
 
         EmployeeThread b2 = new EmployeeThread("Arnau");
         b2.addTask("API authentication", 2100);
         b2.addTask("Testing API", 5500);
-        frontend.addEmployee(b2);
+        backend.addEmployee(b2);
 
         Team database = new Team("Database");
         ManagerThread databaseManager = new ManagerThread(database);
@@ -34,12 +34,12 @@ public class ManagerTasks {
         EmployeeThread d1 = new EmployeeThread("Mireia");
         d1.addTask("Relation Model", 5000);
         d1.addTask("Define models in the database", 4200);
-        frontend.addEmployee(d1);
+        database.addEmployee(d1);
 
         EmployeeThread d2 = new EmployeeThread("Mar");
         d2.addTask("Install DBMS", 3000);
         d2.addTask("Views", 2800);
-        frontend.addEmployee(d2);
+        database.addEmployee(d2);
 
         // TODO: Start all the teams and wait for them to finish their tasks
 
