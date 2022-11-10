@@ -31,6 +31,8 @@ public class SwimmingPool {
             // TODO: Create the threads and start them
         }
 
+        // TODO: Wait 60 seconds and kick all persons
+
         // TODO: Wait for all persons to leave
 
         System.out.println("Tothom ha marxat de la piscina.");
