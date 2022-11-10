@@ -1,15 +1,12 @@
 package ud2.practices.summatrix;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class SumMatrixThread {
+public class SumMatrix {
     public static List<List<Integer>> readMatrixFromCSV(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             return br.lines()
@@ -38,9 +35,9 @@ public class SumMatrixThread {
 
         // TODO: Wait for the threads to finish
 
+        int result = 0;
         // TODO: Sum the result of each thread
 
         System.out.printf("La suma dels valors en \"%s\" és %d\n", CSVPath, result);
-
     }
 }
