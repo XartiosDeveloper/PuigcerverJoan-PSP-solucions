@@ -1,6 +1,6 @@
 package ud2.practices.collectivetasks;
 
-public class ColleectiveTasks {
+public class CollectiveTasks {
     public static void main(String[] args) {
         Team frontend = new Team("Frontend");
         frontend.addTask("Main page design", 2500);
