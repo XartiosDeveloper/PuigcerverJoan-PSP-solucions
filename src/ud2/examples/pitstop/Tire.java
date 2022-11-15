@@ -13,6 +13,9 @@ public class Tire {
         remainingKilometers = 100;
     }
 
+    public void reduceKilometers(int kilometers){
+        this.remainingKilometers -= kilometers;
+    }
     public int getRemainingKilometers() {
         return remainingKilometers;
     }

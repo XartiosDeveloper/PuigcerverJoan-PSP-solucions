@@ -40,6 +40,11 @@ public class Car {
         return backRightTire;
     }
 
+    public void drive(int kilometers){
+        for(Tire t : tires)
+            t.reduceKilometers(kilometers);
+    }
+
     public synchronized void raise() throws InterruptedException {
         Thread.sleep(500);
         raised = true;
@@ -58,10 +63,17 @@ public class Car {
         }
         return true;
     }
-    public synchronized void replaceTire(Tire t) throws InterruptedException{
-        while(!raised) wait();
-        Thread.sleep(ThreadLocalRandom.current().nextInt(500, 1000));
+    public void replaceTire(Tire t) throws InterruptedException{
+        synchronized (this){
+            while(!raised) wait();
+        }
+
+        Thread.sleep(ThreadLocalRandom.current().nextInt(2000, 2001));
         t.replace();
-        notify();
+        System.out.printf("Tire %s replaced.\n", t);
+
+        synchronized (this){
+            notify();
+        }
     }
 }
