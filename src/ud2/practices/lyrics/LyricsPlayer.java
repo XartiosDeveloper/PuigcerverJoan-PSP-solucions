@@ -30,7 +30,7 @@ public class LyricsPlayer {
     }
 
     public boolean isLineAvailable(int i){
-        return lines.size() <= i;
+        return i < lines.size();
     }
 
     public void playLine(int i) throws InterruptedException {
