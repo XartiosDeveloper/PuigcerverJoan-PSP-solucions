@@ -15,16 +15,16 @@ public class CollectiveTasks {
         backend.addTask("Shopping API models", 4200);
         backend.addTask("API authentication", 2100);
         backend.addTask("Testing API", 5500);
-        frontend.addEmployee(new EmployeeThread("Anna"));
-        frontend.addEmployee(new EmployeeThread("Arnau"));
+        backend.addEmployee(new EmployeeThread("Anna"));
+        backend.addEmployee(new EmployeeThread("Arnau"));
 
         Team database = new Team("Database");
         database.addTask("Relation Model", 5000);
         database.addTask("Define models in the database", 4200);
         database.addTask("Install DBMS", 3000);
         database.addTask("Views", 2800);
-        frontend.addEmployee(new EmployeeThread("Mireia"));
-        frontend.addEmployee(new EmployeeThread("Mar"));
+        database.addEmployee(new EmployeeThread("Mireia"));
+        database.addEmployee(new EmployeeThread("Mar"));
 
         // TODO: Start all the teams and wait for them to finish their tasks
 

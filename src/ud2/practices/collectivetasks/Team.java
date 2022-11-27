@@ -14,6 +14,8 @@ public class Team {
         this.name = name;
         employees = new ArrayList<>();
         unfinishedTasks = new ArrayList<>();
+        testingTasks = new ArrayList<>();
+        finishedTasks = new ArrayList<>();
     }
 
     public void addEmployee(EmployeeThread employee) {
