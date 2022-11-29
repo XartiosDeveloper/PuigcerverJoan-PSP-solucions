@@ -25,6 +25,7 @@ public class SushiRestaurant extends Thread {
             while (true){
                 Thread.sleep(1000);
                 makeSushiPiece();
+                System.out.printf("Sushi restaurant (%d/%d)\n", currentSushiPieces, maxSushiPieces);
             }
         } catch (InterruptedException e) {
             System.out.println("Restaurant tancat.");
