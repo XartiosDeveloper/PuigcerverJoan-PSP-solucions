@@ -1,4 +1,4 @@
-package ud2.exams.concert;
+package ud2.exams.concert.solution;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,15 @@ public class BuyConcertTickets {
         for (String name : names){
             BuyerThread b = new BuyerThread(name, website);
             buyers.add(b);
+            b.start();
+        }
+
+        for(BuyerThread b : buyers) {
+            try {
+                b.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
