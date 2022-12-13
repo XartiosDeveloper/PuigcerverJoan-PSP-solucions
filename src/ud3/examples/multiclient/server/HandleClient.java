@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * Classe que gestiona la comunicació del servidor
+ * amb un únic client en un fil d'execució independent.
+ */
 public class HandleClient extends Thread {
     private final Socket client;
     private final BufferedReader in;
@@ -31,12 +35,19 @@ public class HandleClient extends Thread {
     public void close() throws IOException {
         client.close();
     }
+    /**
+     * Fil d'execució independent per cada client.
+     * <p>
+     * Abans que res, el client s'identifica amb un nom.
+     * Després, el servidor mostra els missatges que cada client ha enviat.
+     */
     @Override
     public void run() {
         try {
             setNom(in.readLine());
             System.out.printf("%s s'ha identificat.\n", getNom());
 
+            // Quan un client es desconecta, l'operació readLine() retorna null
             String message;
             while((message = in.readLine()) != null){
                 System.out.printf("%s: %s\n", getNom(), message);

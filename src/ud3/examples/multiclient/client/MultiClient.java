@@ -21,16 +21,20 @@ public class MultiClient {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             Scanner scanner = new Scanner(System.in);
 
+            // Identifiquem el client en el servidor.
+            // El servidor el primer que fa és esperar el nom
             System.out.print("Introdueix el teu nom: ");
             String nom = scanner.nextLine();
             out.println(nom);
 
+            // El client pot enviar missatges fins que escriga END
             String line;
             System.out.print("Text: ");
             while(!(line = scanner.nextLine()).equals("END")){
                 out.println(line);
                 System.out.print("Text: ");
             }
+            // Tanquem la connexió al acabar
             socket.close();
         } catch (ConnectException e) {
             System.err.println("Connection refused!");
