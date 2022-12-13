@@ -27,8 +27,9 @@ public class CreateServer {
             System.out.println("Sha rebut el missatge:");
             System.out.println(missatge);
 
-            System.out.println("S'ha enviat el missatge: \"Rebut!\"");
-            out.println("Rebut!");
+            String resposta = "Rebut!";
+            System.out.println("S'ha enviat el missatge: " + resposta);
+            out.println(resposta);
             out.flush();
 
             System.out.println("Tancant el servidor...");

@@ -7,8 +7,9 @@ import java.net.Socket;
 public class CreateClient {
     public static void main(String[] args) {
         try {
+            String host = "localhost";
             System.out.println("Creant el Socket client.");
-            Socket socket = new Socket("localhost", 1234);
+            Socket socket = new Socket(host, 1234);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             // Es pot utilitzar l'opció autoflush
