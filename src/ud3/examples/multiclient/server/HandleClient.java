@@ -7,10 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class HandleClient extends Thread {
-    private Socket client;
+    private final Socket client;
+    private final BufferedReader in;
+    private final PrintWriter out;
+
     private String nom;
-    private BufferedReader in;
-    private PrintWriter out;
 
     public HandleClient(Socket client) throws IOException {
         this.client = client;
@@ -40,7 +41,7 @@ public class HandleClient extends Thread {
             while((message = in.readLine()) != null){
                 System.out.printf("%s: %s\n", getNom(), message);
             }
-            System.out.printf("%s has disconnected.\n");
+            System.out.printf("%s has disconnected.\n", getNom());
             client.close();
         } catch (IOException e) {
             System.err.println("Error while handling client.");
