@@ -15,7 +15,7 @@ public class HandleClient extends Thread {
     public HandleClient(Socket client) throws IOException {
         this.client = client;
         in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        out = new PrintWriter(client.getOutputStream());
+        out = new PrintWriter(client.getOutputStream(), true);
         nom = null;
     }
 
