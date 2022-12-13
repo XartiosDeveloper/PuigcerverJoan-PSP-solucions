@@ -26,9 +26,12 @@ public class MultiClient {
             out.println(nom);
 
             String line;
+            System.out.print("Text: ");
             while(!(line = scanner.nextLine()).equals("END")){
                 out.println(line);
+                System.out.print("Text: ");
             }
+            socket.close();
         } catch (ConnectException e) {
             System.err.println("Connection refused!");
         } catch (IOException e) {

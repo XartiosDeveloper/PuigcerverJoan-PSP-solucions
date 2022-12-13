@@ -27,16 +27,24 @@ public class HandleClient extends Thread {
         this.nom = nom;
     }
 
+    public void close() throws IOException {
+        client.close();
+    }
     @Override
     public void run() {
         try {
             setNom(in.readLine());
-            while(client.isConnected()){
-                String message = in.readLine();
+            System.out.printf("%s s'ha identificat.\n", getNom());
+
+            String message;
+            while((message = in.readLine()) != null){
                 System.out.printf("%s: %s\n", getNom(), message);
             }
+            System.out.printf("%s has disconnected.\n");
+            client.close();
         } catch (IOException e) {
             System.err.println("Error while handling client.");
+            System.err.println(e.getMessage());
         }
     }
 }

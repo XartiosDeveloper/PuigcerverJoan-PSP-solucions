@@ -24,6 +24,13 @@ public class MulticlientServer extends Thread {
 
     public void close(){
         running = false;
+        for (HandleClient client : clients) {
+            try {
+                client.close();
+            } catch (IOException ignored) {
+            }
+            client.interrupt();
+        }
         this.interrupt();
     }
 
@@ -32,6 +39,7 @@ public class MulticlientServer extends Thread {
         while (running){
             try {
                 Socket client = server.accept();
+                System.out.println("Nou client acceptat.");
                 HandleClient handleClient = new HandleClient(client);
                 clients.add(handleClient);
                 handleClient.start();
