@@ -13,14 +13,15 @@ public class CreateServer {
         try {
             int port = 1234;
             System.out.println("Creant el Socket servidor en el port: " + port);
-            ServerSocket server = new ServerSocket( port);
+            ServerSocket server = new ServerSocket(port);
 
             System.out.println("Esperant connexions...");
             Socket connexio = server.accept();
             System.out.println("Connectat amb el client!");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connexio.getInputStream()));
-            PrintWriter out = new PrintWriter(connexio.getOutputStream());
+            // Activem l'opció autoFlush
+            PrintWriter out = new PrintWriter(connexio.getOutputStream(), true);
 
             System.out.println("Esperant missatge des del client...");
             String missatge = in.readLine();
@@ -30,7 +31,6 @@ public class CreateServer {
             String resposta = "Rebut!";
             System.out.println("S'ha enviat el missatge: " + resposta);
             out.println(resposta);
-            out.flush();
 
             System.out.println("Tancant el servidor...");
             connexio.close();
