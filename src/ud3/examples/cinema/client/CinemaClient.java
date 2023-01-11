@@ -1,37 +1,44 @@
-package ud3.exercises.cinema.client;
+package ud3.examples.cinema.client;
 
-import ud3.exercises.cinema.models.Film;
+import ud3.examples.cinema.models.Film;
+import ud3.examples.cinema.models.Request;
+import ud3.examples.cinema.models.RequestType;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class CinemaClient {
     private final Socket socket;
     private final Scanner scanner;
-    private final PrintWriter out;
     private final ObjectInputStream objIn;
     private final ObjectOutputStream objOut;
 
     public CinemaClient(String host, int port) throws IOException {
         this.scanner = new Scanner(System.in);
         this.socket = new Socket(host, port);
-        this.out = new PrintWriter(socket.getOutputStream(), true);
         this.objOut = new ObjectOutputStream(socket.getOutputStream());
         this.objIn = new ObjectInputStream(socket.getInputStream());
     }
 
-    private void sendFilm(Film f) throws IOException {
-        out.println("POST");
-        objOut.writeObject(f);
+    private void sendFilm(Film f) throws IOException, ClassNotFoundException {
+        Request req = new Request(RequestType.POST, f);
+        objOut.writeObject(req);
+        Request response = (Request) objIn.readObject();
+        if(response.getType() == RequestType.ERROR)
+            System.err.printf("ERROR: %s\n", response.getMessage());
+        else if(response.getType() == RequestType.SUCCESS)
+            System.out.printf("%s\n", response.getMessage());
     }
-    private Film recieveFilm(int id) throws IOException, ClassNotFoundException {
-        out.printf("GET %d\n", id);
-        Film film = (Film) objIn.readObject();
-        return film;
+    private Film receiveFilm(int id) throws IOException, ClassNotFoundException {
+        Request req = new Request(RequestType.GET, id);
+        objOut.writeObject(req);
+        Request in = (Request) objIn.readObject();
+        if(in.getType() == RequestType.ERROR)
+            System.err.printf("ERROR: %s\n", in.getMessage());
+        return (Film) in.getObject();
     }
 
     private void printMenuActions(){
@@ -64,7 +71,7 @@ public class CinemaClient {
                 case 1:
                     try {
                         addFilm();
-                    } catch (IOException e) {
+                    } catch (IOException | ClassNotFoundException e) {
                         System.err.println("Error afegint una pel·lícula.");
                     }
                     break;
@@ -79,7 +86,7 @@ public class CinemaClient {
         }
     }
 
-    private void addFilm() throws IOException {
+    private void addFilm() throws IOException, ClassNotFoundException {
         System.out.println("AFEGIR PEL·LÍCULA");
         System.out.print("Introdueix el nom de la pel·lícula: ");
         String nom = scanner.nextLine();
@@ -95,11 +102,9 @@ public class CinemaClient {
         System.out.println("OBTENIR PEL·LÍCULA");
         System.out.print("Introdueix la id de la pel·lícula: ");
         int id = scanner.nextInt();
-        Film film = recieveFilm(id);
+        Film film = receiveFilm(id);
         if (film != null)
-            System.out.printf("Film %s recieved\n", film);
-        else
-            System.out.printf("No s'ha trobat cap pel·lícula amb id: %d\n", id);
+            System.out.printf("S'ha obtingut la pel·lícula %s.\n", film);
     }
 
     public static void main(String[] args) {

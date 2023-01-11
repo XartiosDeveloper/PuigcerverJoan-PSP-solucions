@@ -1,6 +1,6 @@
-package ud3.exercises.cinema.server;
+package ud3.examples.cinema.server;
 
-import ud3.exercises.cinema.models.Film;
+import ud3.examples.cinema.models.Film;
 
 import java.io.IOException;
 import java.net.ServerSocket;

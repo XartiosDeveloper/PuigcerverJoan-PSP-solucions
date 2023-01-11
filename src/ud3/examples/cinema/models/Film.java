@@ -1,6 +1,5 @@
-package ud3.exercises.cinema.models;
+package ud3.examples.cinema.models;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class Film implements Serializable {
