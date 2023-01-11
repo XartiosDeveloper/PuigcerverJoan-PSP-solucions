@@ -8,6 +8,14 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CinemaServer és un servidor TCP/IP que gestiona pel·lícules.
+ * <p>
+ * Actualment perme't obtindre pel·licules del servidor mitbançant la petició "GET"
+ * i afegir pel·licules mitjançant la petició "POST"
+ *
+ * @author Joan Puigcerver
+ */
 public class CinemaServer {
     private final ServerSocket server;
     private final List<HandleClient> clients;
@@ -15,7 +23,7 @@ public class CinemaServer {
     private boolean running;
 
     /**
-     * Crea un servidor ServerSocket a partir del port.
+     * Crea un servidor CinemaServer en el port port especificat.
      *
      * @param port Port on escoltarà el servidor
      * @throws IOException Excepcions del constructor ServerSocket
@@ -27,15 +35,38 @@ public class CinemaServer {
         running = true;
     }
 
-    public void addFilms(Film f){
-        films.add(f);
+    /**
+     * Afig una pel·licula al servidor.
+     * @param film Pel·licula que s'afegirà
+     */
+    public void addFilms(Film film){
+        films.add(film);
     }
 
+    /**
+     * Obté les pel·licules disponibles en el servidor
+     * @return Llista de pel·licules en el servidor
+     */
     public List<Film> getFilms(){
         return films;
     }
-    public Film getFilm(int i){
-        return films.get(i);
+
+    /**
+     * Obté la pel·lícula identificada per un id. Actualment l'id és
+     * la posició en la llista.
+     * @param id id de la pel·lícula
+     * @return Pel·lícula amb l'id especificada.
+     */
+    public Film getFilm(int id){
+        return films.get(id);
+    }
+
+    /**
+     * Esborra un client de la llista de clients
+     * @param client Client que es vol esborrar
+     */
+    public void removeClient(HandleClient client){
+        clients.remove(client);
     }
 
     /**
@@ -52,10 +83,14 @@ public class CinemaServer {
     public void run() {
         while (running){
             try {
+                // Escolta i esperà una nova connexió.
                 Socket client = server.accept();
+                // Quan un client es connecta, es crea un objecte HandleClient que
+                // gestionarà la comunicació amb el client connectat.
                 System.out.println("Nou client acceptat.");
                 HandleClient handleClient = new HandleClient(client, this);
                 clients.add(handleClient);
+                // S'inicia HandleClient en un fil independent
                 handleClient.start();
             } catch (IOException e) {
                 System.err.println("Error while accepting new connection");
@@ -64,6 +99,10 @@ public class CinemaServer {
         }
     }
 
+    /**
+     * Inicia un servidor CinemaServer en el port 1234
+     * @param args Arguments del programa. No se'n utilitza cap.
+     */
     public static void main(String[] args) {
         try {
             CinemaServer server = new CinemaServer(1234);
