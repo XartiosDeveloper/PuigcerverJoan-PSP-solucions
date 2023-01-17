@@ -2,7 +2,10 @@ package ud4.examples;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -44,7 +47,9 @@ public class AES {
 
     public static String encrypt(SecretKey key, String str){
         try {
+            // Decode the UTF-8 String into byte[] and encrypt it
             byte[] data = encrypt(key, str.getBytes(StandardCharsets.UTF_8));
+            // Encode the encrypted data into base64
             return Base64.getEncoder().encodeToString(data);
         } catch (Exception ex){
             System.err.println("Error xifrant les dades: " + ex);
@@ -53,8 +58,11 @@ public class AES {
     }
     public static String decrypt(SecretKey key, String str){
         try {
-            byte[] data = Base64.getDecoder() .decode(str);
+            // Decode the base64 encrypted string to a byte[]
+            byte[] data = Base64.getDecoder().decode(str);
+            // Decrypyt the byte[] data
             byte[] decrypted = decrypt(key, data);
+            // Encode the decrypted data in a String
             return new String(decrypted);
         } catch (Exception ex){
             System.err.println("Error desxifrant les dades: " + ex);
@@ -69,12 +77,29 @@ public class AES {
         return aes(key, data, Cipher.DECRYPT_MODE);
     }
     private static byte[] aes(SecretKey key, byte[] data, int opmode) throws Exception {
-        byte[] encryptedData = null;
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS4Padding");
         cipher.init(opmode, key);
-        encryptedData =  cipher.doFinal(data);
-        return encryptedData;
+        return cipher.doFinal(data);
     }
+
+    public static void saveSecretKeyToFile(SecretKey key, String path) throws IOException {
+        // Base64 encode the key
+        String encodedKey = Base64.getEncoder().encodeToString(key.getEncoded());
+
+        // Write the key to a file
+        Files.write(Paths.get(path), encodedKey.getBytes());
+    }
+
+    public static SecretKey loadSecretKeyFromFile(String path) throws IOException {
+        // Read the key from file
+        String fileContent = new String(Files.readAllBytes(Paths.get(path)));
+        // Decode the base64 key into byte[]
+        byte[] keyBytes = Base64.getDecoder().decode(fileContent);
+        // Create the SecretKey object
+        return new SecretKeySpec(keyBytes, "AES");
+    }
+
+
 
     public static void main(String[] args) {
         String message = "Aquest és un missatge super secret";
