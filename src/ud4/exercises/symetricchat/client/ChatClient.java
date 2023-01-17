@@ -1,6 +1,6 @@
 package ud4.exercises.symetricchat.client;
 
-import ud4.examples.SymetricAES;
+import ud4.examples.AES;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class ChatClient {
         this.socket = new Socket(host, port);
         this.out = new PrintWriter(socket.getOutputStream(), true);
         this.listener = new ChatListener(socket, this);
-        this.key = SymetricAES.passwordKeyGeneration("1234", 256);
+        this.key = AES.passwordKeyGeneration("1234", 256);
     }
 
     public void identify(){
@@ -42,7 +42,7 @@ public class ChatClient {
         System.out.println("Per exir, escriu \"/exit\".");
         String line;
         while(!(line = scanner.nextLine()).equals("/exit") && this.socket.isConnected()){
-            String encryptedLine = SymetricAES.crypt(key, String.format("%s: %s", nom, line));
+            String encryptedLine = AES.encrypt(key, String.format("%s: %s", nom, line));
             out.println(encryptedLine);
         }
         close();

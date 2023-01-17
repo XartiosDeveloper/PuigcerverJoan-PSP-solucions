@@ -1,6 +1,6 @@
 package ud4.exercises.symetricchat.client;
 
-import ud4.examples.SymetricAES;
+import ud4.examples.AES;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class ChatListener extends Thread {
         String line;
         try {
             while ((line = in.readLine()) != null) {
-                String decryptedLine = SymetricAES.decrypt(client.getKey(), line);
+                String decryptedLine = AES.decrypt(client.getKey(), line);
                 System.out.println(decryptedLine);
             }
         } catch (IOException ignored ){
