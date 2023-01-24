@@ -31,6 +31,7 @@ public class Certificates {
 
     public static void main(String[] args) {
         try {
+            // Guardar contrasenyes en el codi NO ÉS UNA BONA PRÀCTICA
             String keystorePassword = "password";
             KeyStore keyStore = loadKeyStore("files/ud4/keystore.jks", keystorePassword);
 
