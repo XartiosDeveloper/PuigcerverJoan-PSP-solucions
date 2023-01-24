@@ -2,17 +2,15 @@ package ud4.examples;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.sql.SQLOutput;
 import java.util.Collections;
 import java.util.List;
 
-public class Certificates {
+public class KeyStoreExample {
     public static KeyStore loadKeyStore(String ksFile, String ksPwd) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
         KeyStore ks = KeyStore.getInstance("JKS");
         File f = new File (ksFile);
