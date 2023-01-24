@@ -60,7 +60,7 @@ public class RSA {
         return rsa(key, data, Cipher.DECRYPT_MODE);
     }
     private static byte[] rsa(Key key, byte[] data, int opmode) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding","SunJCE");
+        Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(opmode, key);
         return cipher.doFinal(data);
     }
