@@ -17,15 +17,15 @@ public class CreateServer {
             int port = 1234;
             System.out.println("Creant el Socket servidor en el port: " + port);
 
-            System.setProperty("javax.net.ssl.keyStore", "files/ud4/server.jks");
-            System.setProperty("javax.net.ssl.keyStorePassword", "password");
+            System.setProperty("javax.net.ssl.keyStore", "files/ud4/KeyStore.jks");
+            System.setProperty("javax.net.ssl.keyStorePassword", "123456");
             System.setProperty("javax.net.ssl.trustStore", "files/ud4/truststore.jks");
-            System.setProperty("javax.net.ssl.trustStorePassword", "password");
+            System.setProperty("javax.net.ssl.trustStorePassword", "123456");
 
             // Abans
             // ServerSocket server = new ServerSocket(port);
             SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            SSLServerSocket server = (SSLServerSocket) sslserversocketfactory.createServerSocket(443);
+            SSLServerSocket server = (SSLServerSocket) sslserversocketfactory.createServerSocket(1234);
 
             System.out.println("Esperant connexions...");
             // Aquest Socket es de tipus SSLSocket
