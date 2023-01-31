@@ -14,9 +14,7 @@ public class CreateClient {
             String host = "localhost";
             System.out.println("Creant el Socket client.");
 
-            System.setProperty("javax.net.ssl.keyStore", "files/ud4/KeyStore.jks");
-            System.setProperty("javax.net.ssl.keyStorePassword", "123456");
-            System.setProperty("javax.net.ssl.trustStore", "files/ud4/truststore.jks");
+            System.setProperty("javax.net.ssl.trustStore", "files/ud4/client_truststore.jks");
             System.setProperty("javax.net.ssl.trustStorePassword", "123456");
 
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();

@@ -83,7 +83,7 @@ public class LyricsServer {
 
     public static void main(String[] args) {
         try {
-            LyricsServer server = new LyricsServer(1234,"files/ud2/short_lyrics.txt");
+            LyricsServer server = new LyricsServer(1234,"files/ud2/lyrics.txt");
             server.run();
         } catch (IOException e) {
             System.err.println("Error iniciant el servidor.");

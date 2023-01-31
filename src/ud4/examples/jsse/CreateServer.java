@@ -17,10 +17,8 @@ public class CreateServer {
             int port = 1234;
             System.out.println("Creant el Socket servidor en el port: " + port);
 
-            System.setProperty("javax.net.ssl.keyStore", "files/ud4/KeyStore.jks");
+            System.setProperty("javax.net.ssl.keyStore", "files/ud4/server_keystore.jks");
             System.setProperty("javax.net.ssl.keyStorePassword", "123456");
-            System.setProperty("javax.net.ssl.trustStore", "files/ud4/truststore.jks");
-            System.setProperty("javax.net.ssl.trustStorePassword", "123456");
 
             // Abans
             // ServerSocket server = new ServerSocket(port);
