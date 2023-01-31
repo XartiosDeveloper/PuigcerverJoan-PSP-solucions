@@ -33,8 +33,8 @@ public class KeyStoreExample {
              * Guardar contrasenyes en el codi NO ÉS UNA BONA PRÀCTICA,
              * cal utilitzar variables d'entorn
              */
-            String keystorePassword = "123456";
-            KeyStore keyStore = loadKeyStore("files/ud4/server_keystore.jks", keystorePassword);
+            String keyStorePassword = System.getenv("KEYSTORE_PASSWORD");
+            KeyStore keyStore = loadKeyStore("files/ud4/server_keystore.jks", keyStorePassword);
 
             List<String> aliases = Collections.list(keyStore.aliases());
             System.out.println("Certificats en el magatzem de claus.");
@@ -42,6 +42,7 @@ public class KeyStoreExample {
             for(String alias : aliases)
                 System.out.println("- " + alias);
 
+            String alias = aliases.get(0);
             /*
              El certificat ha segut creat prèviament amb la comanda:
              keytool -genkey -keyalg RSA -alias example -keypass keypassword -keystore keystore.jks -storepass password -validity 360 -keysize 2048
@@ -49,15 +50,14 @@ public class KeyStoreExample {
              Per poder llegir informació sobre el subjecte del certificat,
              necessitem utilitzar l'objecte X509Certificate.
              */
-
-            Certificate exampleCertificate = keyStore.getCertificate("server");
+            Certificate exampleCertificate = keyStore.getCertificate(alias);
             printCertificateInfo(exampleCertificate);
 
             // Clau pública del certificat
             PublicKey examplePublic = exampleCertificate.getPublicKey();
 
             // Clau privada
-            PrivateKey examplePrivate = (PrivateKey) keyStore.getKey("server", keystorePassword.toCharArray());
+            PrivateKey examplePrivate = (PrivateKey) keyStore.getKey(alias, keyStorePassword.toCharArray());
 
             String message = "This is a secret information.";
             System.out.printf("Message: %s\n", message);

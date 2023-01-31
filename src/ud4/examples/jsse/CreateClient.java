@@ -12,15 +12,17 @@ import java.net.Socket;
 public class CreateClient {
     public static void main(String[] args) {
         try {
-            String host = "localhost";
-            System.out.println("Creant el Socket client.");
+            String host = System.getenv("HOST");
+            int port = Integer.parseInt(System.getenv("PORT"));
+            String keyStorePassword = System.getenv("KEYSTORE_PASSWORD");
 
+            System.out.println("Creant el Socket client.");
             System.setProperty("javax.net.ssl.trustStore", "files/ud4/client_truststore.jks");
-            System.setProperty("javax.net.ssl.trustStorePassword", "123456");
+            System.setProperty("javax.net.ssl.trustStorePassword", keyStorePassword);
 
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            Socket socket = sslsocketfactory.createSocket("localhost", 1234);
-            // Socket socket = new Socket(host, 1234);
+            Socket socket = sslsocketfactory.createSocket(host, port);
+            // Socket socket = new Socket(host, port);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             // Es pot utilitzar l'opció autoflush per forçar l'enviament de dades

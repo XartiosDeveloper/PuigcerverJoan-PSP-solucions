@@ -14,14 +14,14 @@ import java.net.Socket;
 public class CreateServer {
     public static void main(String[] args) {
         try {
-            int port = 1234;
+            int port = Integer.parseInt(System.getenv("PORT"));
             System.out.println("Creant el Socket servidor en el port: " + port);
 
             System.setProperty("javax.net.ssl.keyStore", "files/ud4/server_keystore.jks");
             System.setProperty("javax.net.ssl.keyStorePassword", "123456");
 
             SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            ServerSocket server = sslserversocketfactory.createServerSocket(1234);
+            ServerSocket server = sslserversocketfactory.createServerSocket(port);
             // ServerSocket server = new ServerSocket(port);
 
             System.out.println("Esperant connexions...");
