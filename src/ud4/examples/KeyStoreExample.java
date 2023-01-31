@@ -29,9 +29,12 @@ public class KeyStoreExample {
 
     public static void main(String[] args) {
         try {
-            // Guardar contrasenyes en el codi NO ÉS UNA BONA PRÀCTICA
-            String keystorePassword = "password";
-            KeyStore keyStore = loadKeyStore("files/ud4/keystore.jks", keystorePassword);
+            /*
+             * Guardar contrasenyes en el codi NO ÉS UNA BONA PRÀCTICA,
+             * cal utilitzar variables d'entorn
+             */
+            String keystorePassword = "123456";
+            KeyStore keyStore = loadKeyStore("files/ud4/server_keystore.jks", keystorePassword);
 
             List<String> aliases = Collections.list(keyStore.aliases());
             System.out.println("Certificats en el magatzem de claus.");
@@ -47,14 +50,14 @@ public class KeyStoreExample {
              necessitem utilitzar l'objecte X509Certificate.
              */
 
-            Certificate exampleCertificate = keyStore.getCertificate("example");
+            Certificate exampleCertificate = keyStore.getCertificate("server");
             printCertificateInfo(exampleCertificate);
 
             // Clau pública del certificat
             PublicKey examplePublic = exampleCertificate.getPublicKey();
 
             // Clau privada
-            PrivateKey examplePrivate = (PrivateKey) keyStore.getKey("example", keystorePassword.toCharArray());
+            PrivateKey examplePrivate = (PrivateKey) keyStore.getKey("server", keystorePassword.toCharArray());
 
             String message = "This is a secret information.";
             System.out.printf("Message: %s\n", message);
