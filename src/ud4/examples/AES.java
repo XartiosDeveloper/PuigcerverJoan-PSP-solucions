@@ -77,7 +77,7 @@ public class AES {
         return aes(key, data, Cipher.DECRYPT_MODE);
     }
     private static byte[] aes(SecretKey key, byte[] data, int opmode) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS4Padding");
+        Cipher cipher = Cipher.getInstance("AES");
         cipher.init(opmode, key);
         return cipher.doFinal(data);
     }

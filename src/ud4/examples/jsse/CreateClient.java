@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
+import java.net.Socket;
 
 public class CreateClient {
     public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class CreateClient {
             System.setProperty("javax.net.ssl.trustStorePassword", "123456");
 
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            SSLSocket socket = (SSLSocket) sslsocketfactory.createSocket("localhost", 1234);
+            Socket socket = sslsocketfactory.createSocket("localhost", 1234);
             // Socket socket = new Socket(host, 1234);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

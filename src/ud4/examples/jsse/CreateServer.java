@@ -20,10 +20,9 @@ public class CreateServer {
             System.setProperty("javax.net.ssl.keyStore", "files/ud4/server_keystore.jks");
             System.setProperty("javax.net.ssl.keyStorePassword", "123456");
 
-            // Abans
-            // ServerSocket server = new ServerSocket(port);
             SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            SSLServerSocket server = (SSLServerSocket) sslserversocketfactory.createServerSocket(1234);
+            ServerSocket server = sslserversocketfactory.createServerSocket(1234);
+            // ServerSocket server = new ServerSocket(port);
 
             System.out.println("Esperant connexions...");
             // Aquest Socket es de tipus SSLSocket
