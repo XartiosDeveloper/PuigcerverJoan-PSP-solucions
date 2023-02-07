@@ -27,7 +27,7 @@ public class ChatListener extends Thread {
                 String decryptedLine = AES.decrypt(client.getKey(), line);
                 System.out.println(decryptedLine);
             }
-        } catch (IOException ignored ){
+        } catch (Exception ignored ){
         } finally {
             this.client.close();
         }

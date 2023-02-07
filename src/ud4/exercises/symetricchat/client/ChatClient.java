@@ -42,8 +42,10 @@ public class ChatClient {
         System.out.println("Per exir, escriu \"/exit\".");
         String line;
         while(!(line = scanner.nextLine()).equals("/exit") && this.socket.isConnected()){
-            String encryptedLine = AES.encrypt(key, String.format("%s: %s", nom, line));
-            out.println(encryptedLine);
+            try {
+                String encryptedLine = AES.encrypt(key, String.format("%s: %s", nom, line));
+                out.println(encryptedLine);
+            } catch (Exception ignored){}
         }
         close();
     }
